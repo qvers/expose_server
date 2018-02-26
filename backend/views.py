@@ -4,10 +4,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from backend.serializers import ExpositionSerializer
-from backend.models import Exposition
+from backend.models import *
 from PIL import Image
 
-# Create your views here.
+
 @api_view(['GET', 'POST'])
 def check(request):
     if request.method == 'GET':
@@ -20,7 +20,9 @@ def check(request):
 
 @api_view(['GET'])
 def return_picture(request):
-    red = Image.new('RGBA', (10, 10), (255, 0, 0, 0))
-    response = HttpResponse(content_type="image/jpeg")
-    red.save(response, "JPEG")
-    return response
+    if request.method == 'GET':
+        pic = Picture.objects.get(id=request.GET.get('pk', 1))
+        r = Image.open(pic.picture.path)
+        response = HttpResponse(content_type="image/jpeg")
+        r.save(response, "JPEG")
+        return response
