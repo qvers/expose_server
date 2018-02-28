@@ -6,10 +6,10 @@ class User(models.Model):
 
 
 class Exposition(models.Model):
-    user = models.ForeignKey(User, null=True)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, verbose_name='Название выставки')
 
 
 class Picture(models.Model):
-    exposition = models.ForeignKey(Exposition, null=True)
+    exposition = models.ForeignKey(Exposition, null=True, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='pictures')
