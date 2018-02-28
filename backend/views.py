@@ -14,8 +14,6 @@ def check(request):
         expositions = Exposition.objects.all()
         serializer = ExpositionSerializer(expositions, many=True)
         return Response(serializer.data)
-    else:
-        return Response(data={"status": "ok"}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
