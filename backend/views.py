@@ -31,6 +31,13 @@ def return_picture(request):
 @api_view(['GET'])
 def return_expo(request):
     if request.method == 'GET':
-        pics = Picture.objects.filter(exposition=request.GET.get('num', 1))
-        serializer = PictureSerializer(pics, many=True, context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        try:
+            expo_id = int(request.GET.get('num'))
+        except Exception:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        expo = Exposition.objects.get(id=expo_id)
+        pics = Picture.objects.filter(exposition=expo_id)
+        exposition_serializer = ExpositionSerializer(expo)
+        picture_serializer = PictureSerializer(pics, many=True, context={"request": request})
+        return Response(data={"exposition": exposition_serializer.data,
+                              "pictures": picture_serializer.data}, status=status.HTTP_200_OK)
