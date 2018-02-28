@@ -12,4 +12,4 @@ class Exposition(models.Model):
 
 class Picture(models.Model):
     exposition = models.ForeignKey(Exposition, null=True)
-    picture = models.ImageField(upload_to='pictures')
+    image = models.ImageField(upload_to='pictures')
