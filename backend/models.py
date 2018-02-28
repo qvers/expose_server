@@ -8,6 +8,8 @@ class User(models.Model):
 class Exposition(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, verbose_name='Название выставки')
+    description = models.CharField(max_length=200, verbose_name='Описание выставки', null=True)
+    expiration_date = models.DateTimeField('дата окончания', null=True, blank=True)
 
 
 class Picture(models.Model):
