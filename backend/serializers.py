@@ -6,7 +6,7 @@ from backend.models import Exposition, Picture
 class ExpositionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exposition
-        fields = ('name', 'description', 'expiration_date')
+        fields = ('id', 'name', 'description', 'expiration_date')
 
 
 class PictureSerializer(serializers.ModelSerializer):

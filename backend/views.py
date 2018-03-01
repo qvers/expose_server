@@ -8,7 +8,7 @@ from backend.models import *
 from PIL import Image
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def check(request):
     if request.method == 'GET':
         expositions = Exposition.objects.all()
